@@ -37,14 +37,12 @@ const TitleStyle = styled.input`
     height: 56px;
     outline: none;
     border-radius: 4px;
+    background:#ffffff1a;
     font-size: 16px;
     color: #313037;
     border: 1px solid #3130371A;
     font-weight: 400;
     &:focus, &:hover{
         border: 1px solid #6C1BDB;
-    }
-    &::placeholder{
-        color: #31303780;
     }
 `;

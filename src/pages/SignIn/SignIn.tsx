@@ -5,14 +5,20 @@ import { Header } from "../../components/header/header";
 import { Input } from "../../components/input/input";
 import { Container, InputContainer } from "../../components/layout/wrapper";
 import { PageTitle } from "../../components/pageTitle/pageTitle";
+import { useTheme } from "../../context/themeContext/theme-context";
 
 export const SignIn = () => {
+    const { theme } = useTheme();
+
     return (
         <>
             <Header />
             <Container style={{ flexDirection: 'column' }}>
                 <PageTitle title='Sign In' button='Back to home' />
-                <InputContainer>
+                <InputContainer style={{
+                    background: theme.colors.bg_header,
+                    color: theme.colors.text
+                }}>
                     <Input title="email" type="email" />
                     <Input title="password" type="password" />
                     <Button style="primary" content="Sign In" />
@@ -33,5 +39,6 @@ const Text = styled.p`
 `;
 
 const SignUp = styled.button`
-    color: blue;
+    color: #6C1BDB;
+    font-weight: bold;
 `;

@@ -10,6 +10,20 @@
 }
 
 .right_block {
-    display: flex;
+    display: none;
     gap: 32px;
+}
+
+.burger {
+    display: flex;
+}
+
+@media (min-width: 500px) {
+    .right_block {
+        display: flex;
+    }
+
+    .burger {
+        display: none;
+    }
 }

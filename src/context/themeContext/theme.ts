@@ -22,7 +22,7 @@ export const darkTheme: Theme = {
     name: "dark",
     colors: {
         bg: "#313037", 
-        bg_header: "#ffffff1a",
+        bg_header: "#45444B",
         text: "#ffffff"
     }
 };

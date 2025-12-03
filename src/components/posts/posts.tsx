@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import './posts.css';
+import { useTheme } from "../../context/themeContext/theme-context";
 
 interface IPost {
     id: string;
@@ -10,10 +11,15 @@ interface IPost {
 }
 
 export const Posts: FC<IPost> = ({ id, image, title, date }) => {
+    const { theme } = useTheme();
+
     return (
-        <button id={id} className="post">
-            <div className="post__card">
-                <img className="post__image" src={image}/>
+        <button id={id} className="post" >
+            <div className="post__card" style={{
+                    background: theme.colors.bg_header,
+                    color: theme.colors.text
+                }}>
+                <img className="post__image" src={image} />
                 <div className="post__date-title">
                     <p className="post__date">{date}</p>
                     <p className="post__title">{title}</p>

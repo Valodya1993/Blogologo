@@ -1,4 +1,5 @@
 import './App.css'
+import { ThemeProvider } from './context/themeContext/theme-context';
 import { Main } from './pages/MainPage/Main'
 import { SignIn } from './pages/SignIn/SignIn';
 import { SignUp } from './pages/SignUp/SignUp';
@@ -135,9 +136,9 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p> */}
-
-        <SignUp />
-        
+      <ThemeProvider>
+        <Main />
+      </ThemeProvider>
     </>
   )
 }

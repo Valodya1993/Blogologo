@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import styled from "styled-components";
+import { useTheme } from "../../context/themeContext/theme-context";
 
 interface IUser {
     name: string;
@@ -12,9 +13,14 @@ export const User: FC<IUser> = ({ name }) => {
         return result.toUpperCase();
     }
 
+    const { theme } = useTheme();
+
     return (
         <WrapperBTN onClick={() => alert(`Ваше имя ${name}`)}>
-            <UserBTN>
+            <UserBTN style={{
+                    background: theme.colors.bg_header,
+                    color: theme.colors.text
+                }}>
                 <UserBTNInside>
                     {StartLetter(name)}
                 </UserBTNInside>
@@ -36,7 +42,6 @@ const UserBTN = styled.div`
     gap: 10px;
     align-items: center;
     border: none;
-    color: #313037;
     font-size: 18px;
     border-left: 1px solid #E8E8E8;
     padding-left: 32px;

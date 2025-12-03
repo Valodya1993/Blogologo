@@ -5,15 +5,20 @@ import { Header } from "../../components/header/header";
 import { Input } from "../../components/input/input";
 import { Container, InputContainer } from "../../components/layout/wrapper";
 import { PageTitle } from "../../components/pageTitle/pageTitle";
-import { colors } from "../../styles/colors";
+import { useTheme } from "../../context/themeContext/theme-context";
 
 export const SignUp = () => {
+    const { theme } = useTheme();
+
     return (
         <>
             <Header />
             <Container style={{ flexDirection: 'column' }}>
                 <PageTitle title='Sign Up' button='Back to home' />
-                <InputContainer>
+                <InputContainer style={{
+                    background: theme.colors.bg_header,
+                    color: theme.colors.text
+                }}>
                     <Input title="name" type="text" />
                     <Input title="email" type="email" />
                     <Input title="password" type="password" />
@@ -33,9 +38,9 @@ const Text = styled.p`
     line-height: 24px;
     margin-top: 24px;
     text-align: center;
-    // background-color: ${colors.secondary};
 `;
 
 const SignIn = styled.button`
-    color: blue;
+    color: #6C1BDB;
+    font-weight: bold;
 `;
