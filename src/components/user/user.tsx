@@ -1,0 +1,54 @@
+import type { FC } from "react";
+import styled from "styled-components";
+
+interface IUser {
+    name: string;
+}
+
+export const User: FC<IUser> = ({ name }) => {
+    function StartLetter(word: string): string {
+        let result: string = '';
+        word.split(' ').forEach((elem) => result += elem[0]);
+        return result.toUpperCase();
+    }
+
+    return (
+        <WrapperBTN onClick={() => alert(`Ваше имя ${name}`)}>
+            <UserBTN>
+                <UserBTNInside>
+                    {StartLetter(name)}
+                </UserBTNInside>
+                {name}
+            </UserBTN>
+        </WrapperBTN>
+    );
+};
+
+const WrapperBTN = styled.button`
+    border: none;
+    cursor: pointer;
+    // width: 100%
+`;
+
+const UserBTN = styled.div`
+    display: flex;
+    height: 60px;
+    gap: 10px;
+    align-items: center;
+    border: none;
+    color: #313037;
+    font-size: 18px;
+    border-left: 1px solid #E8E8E8;
+    padding-left: 32px;
+
+    &:active {
+        background-color: #5463CA;
+    }
+`;
+
+const UserBTNInside = styled.div`
+    background: linear-gradient(#4d0ac7, #912ef2);
+    padding: 10px;
+    color: #ffffff;
+    border-radius: 3px;
+`;

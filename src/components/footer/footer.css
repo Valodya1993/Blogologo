@@ -1,0 +1,36 @@
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 34px;
+    flex-direction: column;
+    max-width: 1120px;
+    align-items: center;
+    gap: 24px;
+}
+
+.footer_text {
+    width: 125;
+    height: 24;
+    top: 34px;
+    left: 399px;
+    opacity: 1;
+}
+
+.dark-theme {
+    display: flex;
+    gap: 20px;
+}
+
+@media (min-width: 500px) {
+    .footer {
+        flex-direction: row;
+        padding: 0 40px;
+    }
+}
+
+@media (min-width: 900px) {
+    .footer {
+        padding: 0;
+    }
+}
