@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import styled, { css } from "styled-components";
+import { useTheme } from "../../context/themeContext/theme-context";
 
 interface IButton {
     content: string;
@@ -9,8 +10,13 @@ interface IButton {
 }
 
 export const Button: FC<IButton> = ({ content, state, onClick, style }) => {
+    const { theme } = useTheme();
+
     return (
-        <StyledButton styleType={style} onClick={onClick} disabled={state}>
+        <StyledButton style={{
+                background: theme.colors.bg_header,
+                color: theme.colors.text
+            }} styleType={style} onClick={onClick} disabled={state}>
             {content}
         </StyledButton>
     );

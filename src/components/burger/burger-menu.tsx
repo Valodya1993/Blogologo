@@ -17,12 +17,15 @@ export const HambMenu = () => {
 
     return (<>
         <MenuBtn onClick={toggleMenu} className={isOpen ? 'open' : ''}>
-            <MenuSpan style={{ background:theme.colors.text }}></MenuSpan>
-            <MenuSpan style={{ background:theme.colors.text }}></MenuSpan>
-            <MenuSpan style={{ background:theme.colors.text }}></MenuSpan>
+            <MenuSpan style={{ background: theme.colors.text }}></MenuSpan>
+            <MenuSpan style={{ background: theme.colors.text }}></MenuSpan>
+            <MenuSpan style={{ background: theme.colors.text }}></MenuSpan>
         </MenuBtn>
-        {/* {isOpen && <Overlay onClick={() => {setIsOpen(!isOpen)}} />}
-        <Sidebar style={{ transform: isOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
+        {isOpen && <Overlay onClick={() => { setIsOpen(!isOpen) }} />}
+        <Sidebar style={{
+            background: theme.colors.bg_header,
+            color: theme.colors.text, transform: isOpen ? 'translateX(0%)' : 'translateX(100%)'
+        }}>
             <div>
                 <BlueBlock />
                 <SeparatorHor />
@@ -32,15 +35,15 @@ export const HambMenu = () => {
                 <SeparatorHor />
             </div>
             <div>
-                <SeparatorHor/>
+                <SeparatorHor />
                 <ThemeIcons>
-                    <ThemeBtn><Sun color='#000'/></ThemeBtn>
+                    {/* <ThemeBtn><Sun color='#000'/></ThemeBtn>
                     <SeparatorVert/>
-                    <ThemeBtn><Moon color='#000'/></ThemeBtn>
+                    <ThemeBtn><Moon color='#000'/></ThemeBtn> */}
                 </ThemeIcons>
                 <Button style="secondary" content="Log out" />
             </div>
-        </Sidebar > */}
+        </Sidebar >
     </>
     );
 }
@@ -58,7 +61,7 @@ const SeparatorVert = styled.div`
 `;
 
 const BlueBlock = styled.div`
-    background-color: #2231AA;
+    background-color: transparent;
     height: 80px;
 `;
 
@@ -71,6 +74,7 @@ const Overlay = styled.div`
         position: fixed;
         top: 0px;
         left: 0px;
+        overflow: hidden;
         width: 100vw;
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.3);
@@ -91,7 +95,8 @@ const Overlay = styled.div`
 const Sidebar = styled.div`
         position: fixed;
         top: 0px;
-        width: fit-content;
+        left: 0px;
+        width: 100vw;
         height: 100vh;
         background: #ffffff;
         color: red;
@@ -106,8 +111,8 @@ const Sidebar = styled.div`
 
 
 const MenuBtn = styled.button`
-        height: 80px;
-        width: 80px;
+        height: 60px;
+        width: 60px;
         border: none;
         display: flex;
         flex-direction: column;

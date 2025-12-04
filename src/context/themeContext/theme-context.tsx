@@ -9,10 +9,18 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [theme, setTheme] = useState<Theme>(lightTheme);
+    const [theme, setTheme] = useState<Theme>(() => {
+        const saved = localStorage.getItem("theme");
+        if (saved === "dark") return darkTheme;
+        return lightTheme;
+    });
 
     const toggleTheme = () => {
-        setTheme((prev) => (prev.name === "light" ? darkTheme : lightTheme));
+        setTheme((prev) => {
+            const next = prev.name === "light" ? darkTheme : lightTheme;
+            localStorage.setItem("theme", next.name); // сохраняем
+            return next;
+        });
     };
 
     return (

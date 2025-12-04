@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { Logo } from "../../assets/logo"
 import { Search } from "../../assets/search"
 import { useTheme } from "../../context/themeContext/theme-context";
@@ -17,6 +18,7 @@ export const Header = () => {
             <button><Logo /></button>
             <div className="right_block">
                 <button><Search /></button>
+                <SeparatorVert />
                 <User name='Vova master'></User>
             </div>
             <div className="burger">
@@ -25,3 +27,9 @@ export const Header = () => {
         </div >
     )
 }
+
+const SeparatorVert = styled.div`
+    width: 1px;
+    height: 100%;
+    background-color: #E8E8E8;
+`;

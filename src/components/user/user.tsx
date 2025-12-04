@@ -33,7 +33,7 @@ export const User: FC<IUser> = ({ name }) => {
 const WrapperBTN = styled.button`
     border: none;
     cursor: pointer;
-    // width: 100%
+    width: 100%
 `;
 
 const UserBTN = styled.div`
@@ -43,7 +43,6 @@ const UserBTN = styled.div`
     align-items: center;
     border: none;
     font-size: 18px;
-    border-left: 1px solid #E8E8E8;
     padding-left: 32px;
 
     &:active {
