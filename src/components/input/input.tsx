@@ -6,10 +6,11 @@ interface IInput {
     type: string;
     id?: string | undefined;
     value?: string;
-    onChange?: (e: ChangeEvent<HTMLInputElement>) => void; 
+    error?: boolean;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input: FC<IInput> = ({ title, type, id, value, onChange}) => {
+export const Input: FC<IInput> = ({ title, type, id, value, error, onChange }) => {
     return (
         <div style={{
             display: 'flex', flexDirection: 'column', width: '100%'
@@ -17,7 +18,8 @@ export const Input: FC<IInput> = ({ title, type, id, value, onChange}) => {
             <Label>{title.charAt(0).toUpperCase() + title.slice(1)}
                 <TitleStyle type={type} placeholder={title === 'confirm password' ? ("Confirm password") : ("Your " + title)}
                     value={value}
-                    onChange={onChange} />
+                    onChange={onChange} 
+                    error={error}/>
             </Label>
         </div >
     );
@@ -30,7 +32,7 @@ const Label = styled.label`
     font-size: 16px;
     font-weight: 600;
 `;
-const TitleStyle = styled.input`
+const TitleStyle = styled.input<{ error?: boolean }>`
     margin: 5px 0 15px;
     padding: 20px;
     width: 100%;
@@ -40,7 +42,7 @@ const TitleStyle = styled.input`
     background:#ffffff1a;
     font-size: 16px;
     color: #313037;
-    border: 1px solid #3130371A;
+    border: ${(props) => (props.error ? "1px solid red" : "1px solid #3130371A")};
     font-weight: 400;
     &:focus, &:hover{
         border: 1px solid #6C1BDB;

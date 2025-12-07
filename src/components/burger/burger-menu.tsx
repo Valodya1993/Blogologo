@@ -3,12 +3,18 @@ import styled from "styled-components";
 import { User } from "../user/user";
 import { Button } from "../button/button";
 import { useTheme } from "../../context/themeContext/theme-context";
+import { Link } from "react-router-dom";
+import { userLogOut } from "../../helpers/LocalStorage";
 
 export const HambMenu = () => {
+    const activeUser = localStorage.getItem("active-user");
     const [isOpen, setIsOpen] = useState(false);
-
     const { theme } = useTheme();
 
+    const logOut = () => {
+        userLogOut();
+        setIsOpen(!isOpen);
+    }
 
     const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.currentTarget.classList.toggle("open");
@@ -29,9 +35,9 @@ export const HambMenu = () => {
             <div>
                 <BlueBlock />
                 <SeparatorHor />
-                <User name='Uladzimir Muliarchyk' />
+                {activeUser !== null && <User name={activeUser} />}
                 <SeparatorHor />
-                <Button style="secondary" content="Home" />
+                <Link to={'/'}><Button style="secondary" content="Home" /></Link>
                 <SeparatorHor />
             </div>
             <div>
@@ -41,7 +47,8 @@ export const HambMenu = () => {
                     <SeparatorVert/>
                     <ThemeBtn><Moon color='#000'/></ThemeBtn> */}
                 </ThemeIcons>
-                <Button style="secondary" content="Log out" />
+                {activeUser !== null && <Button style="secondary" content="Log out" onClick={logOut} />}
+                {activeUser === null && <Link to='/signin' > <Button style="secondary" content="Sign In"/> </Link>}
             </div>
         </Sidebar >
     </>

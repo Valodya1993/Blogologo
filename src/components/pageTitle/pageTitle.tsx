@@ -2,6 +2,8 @@ import type { FC } from "react";
 import styled from "styled-components";
 import { Title } from "../title/title";
 import { useTheme } from "../../context/themeContext/theme-context";
+import { Link } from "react-router-dom";
+import './pageTitle.css';
 
 interface IPageTitle {
     title: string;
@@ -13,14 +15,8 @@ export const PageTitle: FC<IPageTitle> = ({ title, button }) => {
 
     return (
         <div>
-            <BtnBack2Home style={{ color: theme.colors.text }}>{button.charAt(0).toUpperCase() + button.slice(1)}</BtnBack2Home>
+            <Link to='/' className="back2home" style={{ color: theme.colors.text }}>{button.charAt(0).toUpperCase() + button.slice(1)}</Link>
             <Title title={title} />
         </div>
     );
 };
-
-const BtnBack2Home = styled.button`
-    margin-bottom: 32px;
-    font-size: 16px;
-    font-weight: 400;
-`;

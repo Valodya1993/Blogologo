@@ -1,0 +1,16 @@
+h2 {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 80px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+}
+
+.text {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    letter-spacing: 0%;
+}

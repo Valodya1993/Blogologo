@@ -6,9 +6,26 @@ import { Input } from "../../components/input/input";
 import { Container, InputContainer } from "../../components/layout/wrapper";
 import { PageTitle } from "../../components/pageTitle/pageTitle";
 import { useTheme } from "../../context/themeContext/theme-context";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { checkUserLogIn, userLogIn } from "../../helpers/LocalStorage";
 
 export const SignIn = () => {
     const { theme } = useTheme();
+    const navigate = useNavigate();
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+
+    const handleSignIn = () => {
+        console.log("Name:", name);
+        console.log("Email:", email);
+
+        if(!checkUserLogIn(name, email)){
+            userLogIn(name);
+            navigate('/');
+        }
+    };
 
     return (
         <>
@@ -19,10 +36,13 @@ export const SignIn = () => {
                     background: theme.colors.bg_header,
                     color: theme.colors.text
                 }}>
-                    <Input title="email" type="email" />
-                    <Input title="password" type="password" />
-                    <Button style="primary" content="Sign In" />
-                    <Text>Don't have an account? <SignUp>Sign up</SignUp></Text>
+                    <Input title="email" type="email" value={name} onChange={(e) => setName(e.target.value)} />
+                    <Input title="password" type="password" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <Button style="primary" content="Sign In" onClick={handleSignIn}/>
+                    <Text>Don't have an account? <Link to='/signup' style={{
+                        color: '#6C1BDB',
+                        fontWeight: 'bold'
+                    }}>Sign Up</Link></Text>
                 </InputContainer>
             </Container>
             <Footer />

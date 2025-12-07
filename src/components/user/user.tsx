@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import styled from "styled-components";
 import { useTheme } from "../../context/themeContext/theme-context";
+import { UserLogo } from "../../assets/user";
 
 interface IUser {
     name: string;
@@ -16,13 +17,14 @@ export const User: FC<IUser> = ({ name }) => {
     const { theme } = useTheme();
 
     return (
-        <WrapperBTN onClick={() => alert(`Ваше имя ${name}`)}>
+        <WrapperBTN >
             <UserBTN style={{
-                    background: theme.colors.bg_header,
-                    color: theme.colors.text
-                }}>
+                background: theme.colors.bg_header,
+                color: theme.colors.text
+            }}>
                 <UserBTNInside>
-                    {StartLetter(name)}
+                    {name !== 'Sign In' && StartLetter(name) }
+                    {name === 'Sign In' && <UserLogo/> }
                 </UserBTNInside>
                 {name}
             </UserBTN>

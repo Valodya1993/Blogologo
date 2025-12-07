@@ -33,16 +33,16 @@ const StyledButton = styled.button<{ styleType: "primary" | "secondary" }>`
     ${({ styleType }) =>
         styleType === "primary" &&
         css`
-        background-color: #6C1BDB;
-        color: #ffffff;
+        background-color: #6C1BDB !important;
+        color: #ffffff !important;
 
         &:active {
-            background-color: #912EF2;
+            background-color: #912EF2 !important;
         }
 
         &:disabled {
-            background-color: #3130371A;
-            color: #31303780;
+            background-color: #3130371A !important;
+            color: #31303780 !important;
         }
     `}
 

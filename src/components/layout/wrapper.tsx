@@ -9,7 +9,6 @@ export const Container = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     flex: 1;
-    // border: 1px solid blue;  
     padding: 0 24px;
     gap: 32px;
 
@@ -27,7 +26,6 @@ export const Container = styled.div`
 
 export const InputContainer = styled.div`
     width: 100%;
-    // border: 2px solid red;
     margin: auto;
     padding: 24px;
     border-radius: 16px;

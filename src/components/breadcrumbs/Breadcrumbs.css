@@ -1,0 +1,26 @@
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 18px;
+}
+
+.breadcrumbs__link {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+    
+}
+
+.breadcrumbs__link:hover {
+    opacity: 0.7;
+}
+
+.breadcrumbs__divider {
+    color: #aaa;
+}
+
+.breadcrumbs__current {
+    color: #999;
+}
