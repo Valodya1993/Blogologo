@@ -18,8 +18,8 @@ export const Input: FC<IInput> = ({ title, type, id, value, error, onChange }) =
             <Label>{title.charAt(0).toUpperCase() + title.slice(1)}
                 <TitleStyle type={type} placeholder={title === 'confirm password' ? ("Confirm password") : ("Your " + title)}
                     value={value}
-                    onChange={onChange} 
-                    error={error}/>
+                    onChange={onChange}
+                    error={error} />
             </Label>
         </div >
     );

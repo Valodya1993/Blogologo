@@ -1,12 +1,19 @@
 .header {
     position: fixed;
-    padding: 10px 32px;
+    height: 80px;
+    padding: 0 32px;
     top: 0;
     left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     background-color: #ffffff;
+}
+
+.central_block{
+    margin-left: 32px;
+    flex: 1; 
+    display: none;
 }
 
 .right_block {
@@ -20,6 +27,10 @@
 
 @media (min-width: 500px) {
     .right_block {
+        display: flex;
+    }
+
+    .central_block{ 
         display: flex;
     }
 

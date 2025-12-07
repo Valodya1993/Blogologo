@@ -3,17 +3,27 @@ import styled from "styled-components";
 import { User } from "../user/user";
 import { Button } from "../button/button";
 import { useTheme } from "../../context/themeContext/theme-context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userLogOut } from "../../helpers/LocalStorage";
+import { Switch } from "../switch/swith";
+import { Search } from "../../assets/search";
 
 export const HambMenu = () => {
     const activeUser = localStorage.getItem("active-user");
     const [isOpen, setIsOpen] = useState(false);
     const { theme } = useTheme();
+    const [search, setSearch] = useState('');
+    const navigate = useNavigate();
 
     const logOut = () => {
         userLogOut();
         setIsOpen(!isOpen);
+    }
+
+    const handleSearch = () => {
+        navigate(`/search/${encodeURIComponent(search)}`);
+        setSearch('');
+        setIsOpen(false);
     }
 
     const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,21 +44,32 @@ export const HambMenu = () => {
         }}>
             <div>
                 <BlueBlock />
+                {activeUser !== null && <><SeparatorHor />
+                    <div style={{ padding: '0 24px' }}><User name={activeUser} /></div></>}
                 <SeparatorHor />
-                {activeUser !== null && <User name={activeUser} />}
+                <div style={{ position: 'relative', }}>
+                    <SearchInput value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            navigate(`/search/${encodeURIComponent(search)}`);
+                            setSearch('');
+                            setIsOpen(false);
+                        }
+                    }} placeholder="Search..." />
+                    <button style={{ position: 'absolute', top: '18px', right: '24px' }} onClick={handleSearch} ><Search /></button>
+                </div>
                 <SeparatorHor />
                 <Link to={'/'}><Button style="secondary" content="Home" /></Link>
                 <SeparatorHor />
             </div>
             <div>
-                <SeparatorHor />
                 <ThemeIcons>
-                    {/* <ThemeBtn><Sun color='#000'/></ThemeBtn>
-                    <SeparatorVert/>
-                    <ThemeBtn><Moon color='#000'/></ThemeBtn> */}
+                    <p>DarkTheme</p>
+                    <Switch />
                 </ThemeIcons>
+                <SeparatorHor />
                 {activeUser !== null && <Button style="secondary" content="Log out" onClick={logOut} />}
-                {activeUser === null && <Link to='/signin' > <Button style="secondary" content="Sign In"/> </Link>}
+                {activeUser === null && <Link to='/signin' >
+                    <Button style="secondary" content="Sign In" /> </Link>}
             </div>
         </Sidebar >
     </>
@@ -73,8 +94,20 @@ const BlueBlock = styled.div`
 `;
 
 const ThemeIcons = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr;
+    display: flex;
+    gap: 20px;
+    padding: 30px 24px;
+    justify-content: space-between;
+`;
+
+const SearchInput = styled.input`
+    padding: 21px 24px;
+    font-size: 16px;
+    width: 100%;
+
+    &::placeholder{
+        font-size: 16px;
+    }
 `;
 
 const Overlay = styled.div`
@@ -120,6 +153,7 @@ const Sidebar = styled.div`
 const MenuBtn = styled.button`
         height: 60px;
         width: 60px;
+        margin: 10px 0;
         border: none;
         display: flex;
         flex-direction: column;

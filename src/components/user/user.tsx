@@ -45,7 +45,6 @@ const UserBTN = styled.div`
     align-items: center;
     border: none;
     font-size: 18px;
-    padding-left: 32px;
 
     &:active {
         background-color: #5463CA;

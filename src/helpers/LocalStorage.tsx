@@ -25,7 +25,7 @@ export function checkLogin(login: string): boolean {
 }
 
 export function checkUserLogIn(login: string, password: string): boolean {
-    if (!checkLogin)
+    if (!checkLogin(login))
         return false;
     const stored = localStorage.getItem('users');
     const users: IUser[] = JSON.parse(stored ?? '[]');
