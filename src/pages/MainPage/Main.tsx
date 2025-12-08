@@ -1,9 +1,13 @@
 import { Footer } from "../../components/footer/footer";
 import { Header } from "../../components/header/header";
-import { Container } from "../../components/layout/wrapper";
+import { Container, PostContainer } from "../../components/layout/wrapper";
 import { Posts } from "../../components/posts/posts";
 import { useEffect, useState } from "react";
 import { Pagination } from "../../components/pagination/Pagination";
+import { ToggleButtons } from "../../components/buttonGroup/ToggleButtonGroup";
+import { CustomSelect } from "../../components/select/CustomSelect";
+import styled from "styled-components";
+import { Tabs } from "../../components/tabs/Tabs";
 
 interface ApiArticle {
     id: number;
@@ -20,44 +24,165 @@ interface ApiResponse {
 
 const LIMIT = 12;
 
+// --- Генерация дат для фильтра ---
+const getDateFilter = (type: string) => {
+    const now = new Date();
+
+    switch (type) {
+        case "day":
+            return new Date(now.getTime() - 24 * 60 * 60 * 1000);
+        case "week":
+            return new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        case "month":
+            return new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+        case "year":
+            return new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+        default:
+            return null; // all
+    }
+};
 
 export const Main = () => {
-
     const [articles, setArticles] = useState<ApiArticle[]>([]);
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(1);
 
+    const [titleSort, setTitleSort] = useState("az");
+
+    // один фильтр даты для ToggleButtons и CustomSelect
+    const [dateSort, setDateSort] = useState("all");
+
     const totalPages = Math.ceil(count / LIMIT);
 
-    const loadArticles = async (page: number) => {
+    // --- запрос статей ---
+    const loadArticles = async (page: number, filter: string) => {
         const offset = (page - 1) * LIMIT;
 
+        let dateQuery = "";
+        const date = getDateFilter(filter);
+
+        if (date) {
+            dateQuery = `&published_at_gte=${date.toISOString()}`;
+        }
+
         const res = await fetch(
-            `https://api.spaceflightnewsapi.net/v4/articles/?limit=${LIMIT}&offset=${offset}`
+            `https://api.spaceflightnewsapi.net/v4/articles/?limit=${LIMIT}&offset=${offset}${dateQuery}&ordering=-published_at`
         );
+
         const data: ApiResponse = await res.json();
 
-        setArticles(data.results);
+        let sorted = [...data.results];
+
+        // сортировка по title
+        if (titleSort === "az") {
+            sorted = sorted.sort((a, b) => a.title.localeCompare(b.title));
+        } else {
+            sorted = sorted.sort((a, b) => b.title.localeCompare(a.title));
+        }
+
+        setArticles(sorted);
         setCount(data.count);
     };
 
+    // Загружаем статьи при смене страницы или фильтра
     useEffect(() => {
-        loadArticles(page);
-    }, [page]);
+        loadArticles(page, dateSort);
+    }, [page, dateSort, titleSort]);
 
 
     return (
         <>
             <Header />
             <Container>
-                {articles.map((post) => <Posts id={String(post.id)} image={post.image_url} title={post.title} date={new Date(post.published_at).toLocaleDateString()} />)}
+                <Tabs />
+                <SortDiv>
+                    {/* ToggleButtons (мобильный/десктоп) */}
+                    <ToggleButtons
+                        value={dateSort}
+                        onChange={(v) => {
+                            setDateSort(v);
+                            setPage(1); // сброс страницы
+                        }}
+                    />
+
+                    {/* Select фильтр по дате */}
+                    <DateSort>
+                        <CustomSelect
+                            value={dateSort}
+                            onChange={(v) => {
+                                setDateSort(v);
+                                setPage(1);
+                            }}
+                            options={[
+                                { value: "all", label: "All" },
+                                { value: "day", label: "Day" },
+                                { value: "week", label: "Week" },
+                                { value: "month", label: "Month" },
+                                { value: "year", label: "Year" },
+                            ]}
+                        />
+                    </DateSort>
+
+                    {/* Select сортировки по названию */}
+                    <TitleSort>
+                        <CustomSelect
+                            value={titleSort}
+                            onChange={(v) => setTitleSort(v)}
+                            options={[
+                            { value: "az", label: "Title (A-Z)" },
+                            { value: "za", label: "Title (Z-A)" }
+                            ]}
+                        />
+                    </TitleSort>
+                </SortDiv>
+
+                <PostContainer>
+                    {articles.map((post) => (
+                        <Posts
+                            key={post.id}
+                            id={String(post.id)}
+                            image={post.image_url}
+                            title={post.title}
+                            date={new Date(post.published_at).toLocaleDateString()}
+                        />
+                    ))}
+                </PostContainer>
+
                 <Pagination
                     currentPage={page}
                     totalPages={totalPages}
                     onPageChange={setPage}
                 />
+
             </Container>
             <Footer />
         </>
     );
-}
+};
+
+// ---------- Styled ----------
+
+export const SortDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    flex-direction: column;
+    @media (min-width: 500px) {
+        flex-direction: row;
+    }
+`;
+
+const DateSort = styled.div`
+    width: 100%;
+
+    @media (min-width: 900px) {
+        display: none;
+    }
+`;
+
+const TitleSort = styled.div`
+    width: 100%;
+    @media (min-width: 900px) {
+        width: 260px;
+    }
+`;

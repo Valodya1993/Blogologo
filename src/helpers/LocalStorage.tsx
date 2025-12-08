@@ -25,12 +25,12 @@ export function checkLogin(login: string): boolean {
 }
 
 export function checkUserLogIn(login: string, password: string): boolean {
-    if (!checkLogin(login))
-        return false;
     const stored = localStorage.getItem('users');
     const users: IUser[] = JSON.parse(stored ?? '[]');
 
-    return !users.some(user => user.password === password);
+    return users.some(user =>
+        user.login === login && user.password === password
+    );
 }
 
 export function userLogIn(login: string) {

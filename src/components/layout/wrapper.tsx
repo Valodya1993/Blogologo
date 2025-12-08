@@ -6,6 +6,7 @@ export const Container = styled.div`
     margin: 72px auto;
     display: flex;
     width: 100%;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
     flex: 1;
@@ -21,6 +22,23 @@ export const Container = styled.div`
     @media (min-width: 900px){
         max-width: 1120px;
         padding: 0;
+    }
+`;
+
+export const PostContainer = styled.div`
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex: 1;
+    gap: 32px;
+
+    @media (min-width: 500px){
+        gap: 40px 32px;
+    }
+
+    @media (min-width: 900px){
+        max-width: 1120px;
     }
 `;
 

@@ -15,15 +15,19 @@ export const SignIn = () => {
     const navigate = useNavigate();
 
     const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
 
     const handleSignIn = () => {
+        setError(false);
         console.log("Name:", name);
-        console.log("Email:", email);
+        console.log("Password:", password);
 
-        if(!checkUserLogIn(name, email)){
+        if(checkUserLogIn(name, password)){
             userLogIn(name);
             navigate('/');
+        } else {
+            setError(true);
         }
     };
 
@@ -36,8 +40,8 @@ export const SignIn = () => {
                     background: theme.colors.bg_header,
                     color: theme.colors.text
                 }}>
-                    <Input title="email" type="email" value={name} onChange={(e) => setName(e.target.value)} />
-                    <Input title="password" type="password" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <Input title="name" type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+                    <Input title="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <Button style="primary" content="Sign In" onClick={handleSignIn}/>
                     <Text>Don't have an account? <Link to='/signup' style={{
                         color: '#6C1BDB',
