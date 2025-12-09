@@ -18,8 +18,7 @@ export const Posts: FC<IPost> = ({ id, image, title, date }) => {
         <Link to={`/${id}`} id={id} className="post" >
             <div className="post__card" style={{
                 background: theme.colors.bg_header,
-                color: theme.colors.text
-            }}>
+                color: theme.colors.text }}>
                 <img className="post__image" src={image} />
                 <div className="post__date-title">
                     <p className="post__date">{date}</p>

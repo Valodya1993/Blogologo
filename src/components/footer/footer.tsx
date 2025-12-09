@@ -1,4 +1,4 @@
-import { Switch } from '../switch/swith';
+import { Switch } from '../switch/switch';
 import './footer.css';
 
 export const Footer = () => {

@@ -5,7 +5,7 @@ import { Button } from "../button/button";
 import { useTheme } from "../../context/themeContext/theme-context";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogOut } from "../../helpers/LocalStorage";
-import { Switch } from "../switch/swith";
+import { Switch } from "../switch/switch";
 import { Search } from "../../assets/search";
 
 export const HambMenu = () => {

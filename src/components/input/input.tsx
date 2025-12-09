@@ -1,5 +1,6 @@
 import type { ChangeEvent, FC } from "react";
 import styled from "styled-components";
+import { useTheme } from "../../context/themeContext/theme-context";
 
 interface IInput {
     title: string;
@@ -11,6 +12,8 @@ interface IInput {
 }
 
 export const Input: FC<IInput> = ({ title, type, id, value, error, onChange }) => {
+    const { theme } = useTheme();
+
     return (
         <div style={{
             display: 'flex', flexDirection: 'column', width: '100%'
@@ -19,7 +22,11 @@ export const Input: FC<IInput> = ({ title, type, id, value, error, onChange }) =
                 <TitleStyle type={type} placeholder={title === 'confirm password' ? ("Confirm password") : ("Your " + title)}
                     value={value}
                     onChange={onChange}
-                    error={error} />
+                    error={error} 
+                    style={{
+                        background: theme.colors.bg_header,
+                        color: theme.colors.text
+                    }}/>
             </Label>
         </div >
     );
