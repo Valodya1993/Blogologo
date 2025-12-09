@@ -15,6 +15,10 @@ interface ApiArticle {
     published_at: string;
 }
 
+interface ISearchPage {
+    tab: string;
+}
+
 interface ApiResponse {
     count: number;
     results: ApiArticle[];
@@ -22,7 +26,7 @@ interface ApiResponse {
 
 const LIMIT = 12;
 
-export const SearchPage = () => {
+export const SearchPage: FC<ISearchPage> = (tab) => {
     const [articles, setArticles] = useState<ApiArticle[]>([]);
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(1);
@@ -60,7 +64,7 @@ export const SearchPage = () => {
         <>
             <Header />
             <Container>
-                <SearchTitle>Количество найденных слов "{word}" : {count}</SearchTitle>
+                <SearchTitle>Number of words found "{word}" : {count}</SearchTitle>
                 <PostContainer>
                     {articles.length === 0 && (
                         <p style={{ padding: "40px 0", fontSize: "20px" }}>
@@ -71,7 +75,7 @@ export const SearchPage = () => {
                     {articles.map((post) => (
                         <Posts
                             key={post.id}
-                            id={String(post.id)}
+                            id={String('articles/'+post.id)}
                             image={post.image_url}
                             title={post.title}
                             date={new Date(post.published_at).toLocaleDateString()}

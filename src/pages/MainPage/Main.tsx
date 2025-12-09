@@ -53,7 +53,7 @@ export const Main = () => {
     const [dateSort, setDateSort] = useState("all");
 
     // 🔥 добавлен таб Articles / Blogs
-    const [tab, setTab] = useState("blogs");
+    const [tab, setTab] = useState("articles");
 
     const totalPages = Math.ceil(count / LIMIT);
 

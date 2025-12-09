@@ -48,7 +48,9 @@ export const HambMenu = () => {
                     <div style={{ padding: '0 24px' }}><User name={activeUser} /></div></>}
                 <SeparatorHor />
                 <div style={{ position: 'relative', }}>
-                    <SearchInput value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => {
+                    <SearchInput value={search} style={{
+                        background: theme.colors.bg_header,
+                        color: theme.colors.text }} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => {
                         if (e.key === "Enter") {
                             navigate(`/search/${encodeURIComponent(search)}`);
                             setSearch('');
