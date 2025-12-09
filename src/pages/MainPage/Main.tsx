@@ -7,7 +7,7 @@ import { Pagination } from "../../components/pagination/Pagination";
 import { ToggleButtons } from "../../components/buttonGroup/ToggleButtonGroup";
 import { CustomSelect } from "../../components/select/CustomSelect";
 import styled from "styled-components";
-import { Tabs } from "../../components/tabs/Tabs";
+import { Tabs } from "../../components/tabs/tabs";
 
 interface ApiArticle {
     id: number;
@@ -47,61 +47,88 @@ export const Main = () => {
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(1);
 
-    const [titleSort, setTitleSort] = useState("az");
+    const [titleSort, setTitleSort] = useState("lp");
 
-    // один фильтр даты для ToggleButtons и CustomSelect
+    // один фильтр для ToggleButtons и CustomSelect
     const [dateSort, setDateSort] = useState("all");
+
+    // 🔥 добавлен таб Articles / Blogs
+    const [tab, setTab] = useState("blogs");
 
     const totalPages = Math.ceil(count / LIMIT);
 
-    // --- запрос статей ---
-    const loadArticles = async (page: number, filter: string) => {
+    // --- запрос данных ---
+    const loadArticles = async () => {
         const offset = (page - 1) * LIMIT;
-
+    
+        // выбираем endpoint по табу
+        const endpoint =
+            tab === "articles"
+                ? "https://api.spaceflightnewsapi.net/v4/articles/"
+                : "https://api.spaceflightnewsapi.net/v4/blogs/";
+    
         let dateQuery = "";
-        const date = getDateFilter(filter);
-
+        const date = getDateFilter(dateSort);
+    
         if (date) {
             dateQuery = `&published_at_gte=${date.toISOString()}`;
         }
-
-        const res = await fetch(
-            `https://api.spaceflightnewsapi.net/v4/articles/?limit=${LIMIT}&offset=${offset}${dateQuery}&ordering=-published_at`
-        );
-
-        const data: ApiResponse = await res.json();
-
-        let sorted = [...data.results];
-
-        // сортировка по title
-        if (titleSort === "az") {
-            sorted = sorted.sort((a, b) => a.title.localeCompare(b.title));
-        } else {
-            sorted = sorted.sort((a, b) => b.title.localeCompare(a.title));
+    
+        // --- сортировка на стороне API ---
+        let ordering = "-published_at"; // default: latest first
+    
+        if (titleSort === "op") {
+            ordering = "published_at"; // old posts
         }
-
+    
+        // запрос
+        const res = await fetch(
+            `${endpoint}?limit=${LIMIT}&offset=${offset}${dateQuery}&ordering=${ordering}`
+        );
+    
+        const data: ApiResponse = await res.json();
+    
+        let sorted = [...data.results];
+    
+        // --- локальная сортировка только по названию ---
+        if (titleSort === "az") {
+            sorted.sort((a, b) => a.title.localeCompare(b.title));
+        } 
+        else if (titleSort === "za") {
+            sorted.sort((a, b) => b.title.localeCompare(a.title));
+        }
+    
         setArticles(sorted);
         setCount(data.count);
     };
 
-    // Загружаем статьи при смене страницы или фильтра
+    // загрузка при изменении условий
     useEffect(() => {
-        loadArticles(page, dateSort);
-    }, [page, dateSort, titleSort]);
-
+        loadArticles();
+    }, [page, dateSort, titleSort, tab]);
 
     return (
         <>
             <Header />
             <Container>
-                <Tabs />
+
+                {/* 🔥 переключатель Articles / Blogs */}
+                <Tabs
+                    value={tab}
+                    onChange={(v) => {
+                        setTab(v);
+                        setPage(1);
+                    }}
+                />
+
                 <SortDiv>
+
                     {/* ToggleButtons (мобильный/десктоп) */}
                     <ToggleButtons
                         value={dateSort}
                         onChange={(v) => {
                             setDateSort(v);
-                            setPage(1); // сброс страницы
+                            setPage(1);
                         }}
                     />
 
@@ -129,8 +156,10 @@ export const Main = () => {
                             value={titleSort}
                             onChange={(v) => setTitleSort(v)}
                             options={[
-                            { value: "az", label: "Title (A-Z)" },
-                            { value: "za", label: "Title (Z-A)" }
+                                { value: "lp", label: "Date (Latest posts)" },
+                                { value: "op", label: "Date (Old posts)" },
+                                { value: "az", label: "Title (A-Z)" },
+                                { value: "za", label: "Title (Z-A)" }
                             ]}
                         />
                     </TitleSort>
@@ -140,7 +169,7 @@ export const Main = () => {
                     {articles.map((post) => (
                         <Posts
                             key={post.id}
-                            id={String(post.id)}
+                            id={String(tab+'/'+post.id)}
                             image={post.image_url}
                             title={post.title}
                             date={new Date(post.published_at).toLocaleDateString()}
@@ -174,7 +203,6 @@ export const SortDiv = styled.div`
 
 const DateSort = styled.div`
     width: 100%;
-
     @media (min-width: 900px) {
         display: none;
     }

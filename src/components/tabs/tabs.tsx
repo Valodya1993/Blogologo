@@ -1,36 +1,38 @@
-import { type FC, useState } from "react";
+import { type FC } from "react";
 import styled from "styled-components";
 import { useTheme } from "../../context/themeContext/theme-context";
 
 interface Tab {
   id: string;
   label: string;
-  disabled?: boolean;
 }
 
-export const Tabs: FC = () => {
-  const [active, setActive] = useState("articles");
+interface TabsProps {
+  value: string;                // текущий таб
+  onChange: (v: string) => void; // функция смены таба
+}
+
+export const Tabs: FC<TabsProps> = ({ value, onChange }) => {
   const { theme } = useTheme();
 
   const tabs: Tab[] = [
     { id: "articles", label: "Articles" },
-    { id: "news", label: "News" },
+    { id: "blogs", label: "Blogs" }
   ];
 
   return (
-    <Wrapper>
+    <Wrapper >
       {tabs.map((tab) => (
         <Button
           key={tab.id}
-          $active={active === tab.id}
-          disabled={tab.disabled}
-          onClick={() => !tab.disabled && setActive(tab.id)}
+          $active={value === tab.id}
+          onClick={() => onChange(tab.id)}
           style={{
-            color: theme.colors.text
-        }}
+            color: theme.colors.text,
+          }}
         >
           {tab.label}
-          {active === tab.id && !tab.disabled && <Line />}
+          {value === tab.id && <Line style={{ background: theme.colors.text }} />}
         </Button>
       ))}
     </Wrapper>
@@ -49,14 +51,15 @@ const Button = styled.button<{ $active?: boolean }>`
   position: relative;
   padding: 10px 20px;
   font-size: 16px;
+
   font-weight: ${(p) => (p.$active ? "600" : "400")};
-  color: ${(p) => (p.disabled ? "#aaa" : p.$active ? "#000" : "#555")};
   background: none;
   border: none;
-  cursor: ${(p) => (p.disabled ? "not-allowed" : "pointer")};
-  
+  cursor: pointer;
+  color: #555;
+
   &:hover {
-    color: ${(p) => (!p.disabled && !p.$active ? "#6C1BDB" : "")}!important;
+    color: #6C1BDB !important;
   }
 `;
 
@@ -67,5 +70,4 @@ const Line = styled.div`
   left: 0;
   right: 0;
   height: 2px;
-  background: #000;
 `;

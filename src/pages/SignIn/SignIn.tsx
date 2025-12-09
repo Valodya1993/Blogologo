@@ -40,8 +40,10 @@ export const SignIn = () => {
                     background: theme.colors.bg_header,
                     color: theme.colors.text
                 }}>
-                    <Input title="name" type="text" value={name} onChange={(e) => setName(e.target.value)}/>
-                    <Input title="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <Input title="name" type="text" value={name} onChange={(e) => setName(e.target.value)} error={error}/>
+                    <Input title="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} error={error}
+                    />
+                    {error && <ErrorMessage>Incorrect login or password</ErrorMessage>}
                     <Button style="primary" content="Sign In" onClick={handleSignIn}/>
                     <Text>Don't have an account? <Link to='/signup' style={{
                         color: '#6C1BDB',
@@ -65,4 +67,10 @@ const Text = styled.p`
 const SignUp = styled.button`
     color: #6C1BDB;
     font-weight: bold;
+`;
+
+const ErrorMessage = styled.p`
+    color: red;
+    margin-left: 15px;
+    margin-bottom: 15px;
 `;

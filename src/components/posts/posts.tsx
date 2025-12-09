@@ -15,7 +15,7 @@ export const Posts: FC<IPost> = ({ id, image, title, date }) => {
     const { theme } = useTheme();
 
     return (
-        <Link to={`/article/${id}`} id={id} className="post" >
+        <Link to={`/${id}`} id={id} className="post" >
             <div className="post__card" style={{
                 background: theme.colors.bg_header,
                 color: theme.colors.text

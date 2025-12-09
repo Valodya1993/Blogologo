@@ -11,11 +11,10 @@ export const Router = () => {
             <Route path="/" element={<Main />} />
             <Route path="/signin" element={<SignIn />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
-            <Route path="/article/:id" element={<FullPage />}></Route>
+            <Route path="/articles/:id" element={<FullPage />}></Route>
             <Route path="/search/:word" element={<SearchPage />} />
             <Route path="/search/" element={<Main />} />
-
-            {/* <Route path="*" element={<NotFound />} /> */}
+            <Route path="/blogs/:id" element={<FullPage />} />
         </Routes>
     );
 }

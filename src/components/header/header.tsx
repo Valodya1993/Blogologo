@@ -77,6 +77,21 @@ export const Header = () => {
     )
 }
 
+const UserMenu = ({ onLogout }: { onLogout: () => void }) => {
+    const { theme } = useTheme();
+
+    return (
+        <MenuBox style={{
+            background: theme.colors.bg_header,
+            color: theme.colors.text
+        }}>
+            <MenuButton onClick={onLogout} style={{
+            color: theme.colors.text
+        }}>Logout</MenuButton>
+        </MenuBox>
+    );
+};
+
 const SeparatorVert = styled.div`
     width: 1px;
     height: 100%;
@@ -128,18 +143,3 @@ const MenuButton = styled.button`
         color: #ffffff !important;
     }
 `;
-
-const UserMenu = ({ onLogout }: { onLogout: () => void }) => {
-    const { theme } = useTheme();
-
-    return (
-        <MenuBox style={{
-            background: theme.colors.bg_header,
-            color: theme.colors.text
-        }}>
-            <MenuButton onClick={onLogout} style={{
-            color: theme.colors.text
-        }}>Logout</MenuButton>
-        </MenuBox>
-    );
-};
