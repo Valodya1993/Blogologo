@@ -11,7 +11,7 @@ interface IInput {
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input: FC<IInput> = ({ title, type, id, value, error, onChange }) => {
+export const Input: FC<IInput> = ({ title, type, value, error, onChange }) => {
     const { theme } = useTheme();
 
     return (

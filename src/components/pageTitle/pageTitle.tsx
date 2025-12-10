@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import styled from "styled-components";
 import { Title } from "../title/title";
 import { useTheme } from "../../context/themeContext/theme-context";
 import { Link } from "react-router-dom";

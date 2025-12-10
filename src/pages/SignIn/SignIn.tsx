@@ -64,11 +64,6 @@ const Text = styled.p`
     text-align: center;
 `;
 
-const SignUp = styled.button`
-    color: #6C1BDB;
-    font-weight: bold;
-`;
-
 const ErrorMessage = styled.p`
     color: red;
     margin-left: 15px;

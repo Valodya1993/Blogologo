@@ -18,9 +18,6 @@ export const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("");
-
-    const confirmPasswordError = confirmPassword.length > 0 && password !== confirmPassword;
 
     const nameError =
         !!name && name.length < 2 ? "Name must be at least 2 characters" : "";
@@ -37,32 +34,10 @@ export const SignUp = () => {
             : "";
 
     const handleSignUp = () => {
-
-        if (password !== confirmPassword) {
-            console.log("❌ Passwords do not match");
-            return;
+        if (!nameError && !emailError && !passwordError && !confirmError) {
+            addNewUser(name, email, password);
+            navigate('/');
         }
-
-        console.log("Name:", name);
-        console.log("Email:", email);
-        console.log("Password:", password);
-        console.log("Confirm password:", confirmPassword);
-
-        if (!name || !email || !password || !confirmPassword) {
-            setError("Please fill all fields");
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            setError("Passwords do not match");
-            return;
-        }
-
-        setError("");
-        console.log("SUCCESS:", { name, email, password });
-
-        addNewUser(name, email, password);
-        navigate('/');
     };
 
     return (

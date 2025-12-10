@@ -84,12 +84,6 @@ const SeparatorHor = styled.div`
     background-color: #E8E8E8;
 `;
 
-const SeparatorVert = styled.div`
-    width: 1px;
-    height: 100%;
-    background-color: #E8E8E8;
-`;
-
 const BlueBlock = styled.div`
     background-color: transparent;
     height: 80px;
@@ -185,8 +179,3 @@ const MenuSpan = styled.span`
         border-radius: 3px;
         transition: 0.3s ease;
         `;
-
-const ThemeBtn = styled.button`
-    width: 100%;
-    height: 80px;
-`;
