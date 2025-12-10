@@ -40,7 +40,7 @@ npm run dev
 ```
 5. Open in browser: http://localhost:5137
 
-###Project Structure
+### Project Structure
 ```csharp
 Blogologo/
 ├─ public/             # Static assets
@@ -60,7 +60,7 @@ Blogologo/
 └─ vite.config.ts
 ```
 
-###Current Features
+### Current Features
 
  - Basic React + TypeScript + Vite setup
  - Component-based architecture
@@ -111,7 +111,7 @@ npm run dev
 ```
 5. Откройте в браузере: http://localhost:5137
 
-###Структура проекта
+### Структура проекта
 ```csharp
 Blogologo/
 ├─ public/             # Статические файлы
@@ -131,7 +131,7 @@ Blogologo/
 └─ vite.config.ts
 ```
 
-###Current Features
+### Current Features
 
  - Базовая структура React + TypeScript + Vite
  - Компонентная архитектура
