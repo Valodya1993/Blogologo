@@ -1,73 +1,140 @@
-# React + TypeScript + Vite
+# Blogologo
+Blogologo — Final TMS project.
+A modern blogging platform built with React, TypeScript and Vite.  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### About
 
-Currently, two official plugins are available:
+Blogologo is a web application designed to create, manage, and display blog content efficiently.  
+The project aims to provide a fast, type-safe, and developer-friendly stack for building web applications with modern frontend technologies.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Key goals:
+- Fast and responsive user interface
+- Type-safe code with TypeScript
+- Modular, reusable components
 
-## React Compiler
+### Tech Stack / Used Technologies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** – UI library  
+- **TypeScript** – Static type checking  
+- **Vite** – Fast development build tool  
+- **CSS / SCSS** – Styling  
+- **ESLint / Prettier** – Code quality and formatting
 
-## Expanding the ESLint configuration
+### Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clone the repository:  
+```bash
+git clone https://github.com/Valodya1993/Blogologo.git
+```
+2. Go to project directory:
+```bash
+cd Blogologo
+```
+3. Install dependencies:
+```bash
+npm install
+```
+4. Run development server:
+```bash
+npm run dev
+```
+5. Open in browser: http://localhost:5137
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+###Project Structure
+```csharp
+Blogologo/
+├─ public/             # Static assets
+├─ src/
+│  ├─ api/             # API
+│  ├─ assets/          # Icons
+│  ├─ components/      # Reusable UI components
+│  ├─ context/         # Light\dark theme
+│  ├─ helpers/         # Auxiliary functions
+│  ├─ pages/           # Application pages
+│  ├─ router/          # React-router-dom
+│  ├─ styles/          # Global styles
+│  ├─ App.tsx          # Main app component
+│  └─ main.tsx         # Entry point
+├─ package.json
+├─ tsconfig.json
+└─ vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+###Current Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+ - Basic React + TypeScript + Vite setup
+ - Component-based architecture
+ - Linting and formatting with ESLint & Prettier
+ - Routing between pages
+ - Responsive UI layout
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+
+
+ # Blogologo
+Blogologo — Финальный проект TMS.
+Современная веб‑платформа на React + TypeScript + Vite для создания и управления блогом.
+  
+### О проекте
+
+Blogologo — веб-приложение для создания, управления и отображения блог-контента.
+Проект создаётся с целью предоставить быстрый, типобезопасный и удобный для разработки стек для работы с современным фронтендом.
+
+Основные цели:
+- Быстрый и отзывчивый интерфейс
+- Типобезопасный код на TypeScript
+- Модульные и переиспользуемые компоненты
+
+### Технологии
+- **React** – библиотека для интерфейсов  
+- **TypeScript** – статическая типизация
+- **Vite** – инструмент быстрой сборки
+- **CSS / SCSS** – стили  
+- **ESLint / Prettier** – контроль качества кода и форматирование
+
+### Запуск проекта
+
+1. Клонируйте репозиторий:  
+```bash
+git clone https://github.com/Valodya1993/Blogologo.git
 ```
+2. Перейдите в папку проекта:
+```bash
+cd Blogologo
+```
+3. Установите зависимости:
+```bash
+npm install
+```
+4. Запустите сервер разработки:
+```bash
+npm run dev
+```
+5. Откройте в браузере: http://localhost:5137
+
+###Структура проекта
+```csharp
+Blogologo/
+├─ public/             # Статические файлы
+├─ src/
+│  ├─ api/             # API
+│  ├─ assets/          # Иконки
+│  ├─ components/      # Переиспользуемые UI-компоненты
+│  ├─ context/         # Светлая\темная тема
+│  ├─ helpers/         # Вспомогательные функции
+│  ├─ pages/           # Страницы приложения
+│  ├─ router/          # React-router-dom
+│  ├─ styles/          # Глобальные стили
+│  ├─ App.tsx          # Главный компонент приложения
+│  └─ main.tsx         # Точка входа
+├─ package.json
+├─ tsconfig.json
+└─ vite.config.ts
+```
+
+###Current Features
+
+ - Базовая структура React + TypeScript + Vite
+ - Компонентная архитектура
+ - Linting и форматирование через ESLint & Prettier
+ - Маршрутизация между страницами
+ - Адаптивный интерфейс
