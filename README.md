@@ -40,6 +40,10 @@ npm run dev
 ```
 5. Open in browser: http://localhost:5137
 
+### Or you can open this website: 
+https://valodya1993.github.io/Blogologo/
+
+
 ### Project Structure
 ```csharp
 Blogologo/
@@ -110,6 +114,9 @@ npm install
 npm run dev
 ```
 5. Откройте в браузере: http://localhost:5137
+
+### Или можете пройти на этот сайт: 
+https://valodya1993.github.io/Blogologo/
 
 ### Структура проекта
 ```csharp
