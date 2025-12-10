@@ -35,7 +35,7 @@ export const FullPage: FC = () => {
         <>
             <Header />
             <Container>
-                <Breadcrumbs />
+                <Breadcrumbs type={type}/>
                 <h2>{article.title}</h2>
 
                 <img
