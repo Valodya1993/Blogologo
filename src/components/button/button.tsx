@@ -16,13 +16,13 @@ export const Button: FC<IButton> = ({ content, state, onClick, style }) => {
         <StyledButton style={{
                 background: theme.colors.bg_header,
                 color: theme.colors.text
-            }} styleType={style} onClick={onClick} disabled={state}>
+            }} $styleType={style} onClick={onClick} disabled={state}>
             {content}
         </StyledButton>
     );
 };
 
-const StyledButton = styled.button<{ styleType: "primary" | "secondary" }>`
+const StyledButton = styled.button<{ $styleType: "primary" | "secondary" }>`
     padding: 15px;
     border: none;
     font-size: 18px;
@@ -30,8 +30,8 @@ const StyledButton = styled.button<{ styleType: "primary" | "secondary" }>`
     cursor: pointer;
     width: -webkit-fill-available;
 
-    ${({ styleType }) =>
-        styleType === "primary" &&
+    ${({ $styleType }) =>
+        $styleType === "primary" &&
         css`
         background-color: #6C1BDB !important;
         color: #ffffff !important;
@@ -46,8 +46,8 @@ const StyledButton = styled.button<{ styleType: "primary" | "secondary" }>`
         }
     `}
 
-    ${({ styleType }) =>
-        styleType === "secondary" &&
+    ${({ $styleType }) =>
+        $styleType === "secondary" &&
         css`
         background-color: #3130371A;
         color: #313037;

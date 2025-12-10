@@ -39,7 +39,7 @@ export const Header = () => {
             <Link to='/' style={{ margin: 'auto 0' }}><Logo /></Link>
             <div className="central_block" style={{ background: isSearchOpen ? theme.colors.bg : '' }}>
 
-                <SearchInput style={{ background: theme.colors.bg, color: theme.colors.text, cursor: isSearchOpen ? 'text' : 'default' }} value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." isSearchOpen={isSearchOpen} onKeyDown={(e) => {
+                <SearchInput style={{ background: theme.colors.bg, color: theme.colors.text, cursor: isSearchOpen ? 'text' : 'default' }} value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." $isSearchOpen={isSearchOpen} onKeyDown={(e) => {
                     if (e.key === "Enter") {
                         navigate(`/search/${encodeURIComponent(search)}`);
                         setSearch('');
@@ -98,14 +98,14 @@ const SeparatorVert = styled.div`
     background-color: #E8E8E8;
 `;
 
-const SearchInput = styled.input<{ isSearchOpen?: boolean }>`
+const SearchInput = styled.input<{ $isSearchOpen?: boolean }>`
     padding: 21px 24px;
     font-size: 16px;
     width: 100%;
     flex: 1; 
     margin: 0 32px;
     border-radius: 5px;
-    opacity: ${(props) => (props.isSearchOpen ? '1' : '0')};
+    opacity: ${(props) => (props.$isSearchOpen ? '1' : '0')};
 
     &::placeholder{
         font-size: 16px;
